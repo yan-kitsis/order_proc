@@ -1,0 +1,65 @@
+<html>
+<header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+function SubmitOrder()
+{
+
+
+  $.post("register_order.php",
+  {
+ //  The right format for order is
+ // {"Header": 1, "Lines":[ {"Product": "A", "Quantity": "1"},{"Product": "C", "Quantity": "4"}]}
+//    order: '{"Header": 1, "Lines":[ {"Product": "A", "Quantity": "1"},{"Product": "C", "Quantity": "4"}]}'
+	order: $('#order').val()
+  },
+  function(data,status){
+    alert( data);
+  });
+
+
+}
+
+function CreateStorage()
+{
+  $.post("register_order.php",
+  {
+    mode: 'create_storage'
+  },
+  function(data,status){
+    alert( data);
+  });
+
+
+}
+function PrintLog()
+{
+  $.post("register_order.php",
+  {
+    mode: 'print_log'
+  },
+  function(data,status){
+    alert( data);
+	$('#log_div').html(data);
+	$('#log_div').show();
+  });
+
+
+}
+
+
+</script>
+</header>
+<body>
+<form> 
+Enter order:<br/>
+<input type="text" id="order" name="order" style="width: 600px;" value="" >
+<input type="button" onclick="SubmitOrder()" value="Submit order" ><br/>
+<input type="button" onclick="CreateStorage()" value="Create Storage" ><br/>
+<input type="button" onclick="PrintLog()" value="Print Log" ><br/>
+<div id='log_div' style="display: none;" >
+</log>
+</form>
+</body>
+</html>
